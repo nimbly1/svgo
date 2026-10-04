@@ -1,5 +1,6 @@
 Unwraps an anchor once when both href and xlink:href are executable, and
-keeps the surrounding elements.
+keeps the surrounding elements. An empty executable anchor does not hide the
+anchor that follows it.
 
 ===
 
@@ -15,6 +16,15 @@ keeps the surrounding elements.
     <rect id="mixed"/>
   </a>
   <circle id="mixed-sibling"/>
+  <a href="javascript:alert(1)"/>
+  <a href="javascript:alert(2)">
+    <rect id="next"/>
+  </a>
+  <a href="javascript:alert(1)">
+    <a href="javascript:alert(2)">
+      <rect id="nested"/>
+    </a>
+  </a>
 </svg>
 
 @@@
@@ -26,4 +36,6 @@ keeps the surrounding elements.
     <circle id="after"/>
     <rect id="mixed"/>
     <circle id="mixed-sibling"/>
+    <rect id="next"/>
+    <rect id="nested"/>
 </svg>
