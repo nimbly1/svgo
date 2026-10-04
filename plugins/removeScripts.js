@@ -158,10 +158,16 @@ export const fn = () => {
               }
 
               const index = parentNode.children.indexOf(node);
+              // The anchor may already have been unwrapped for another href.
+              // splice(-1) would replace the parent's last child.
+              if (index === -1) {
+                break;
+              }
               const usefulChildren = node.children.filter(
                 (child) => child.type !== 'text',
               );
               parentNode.children.splice(index, 1, ...usefulChildren);
+              break;
             }
           }
         }
